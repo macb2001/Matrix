@@ -30,8 +30,6 @@ class CMatrixPro2{
    CMatrixPro2 operator -(int x);
    CMatrixPro2 operator *(const CMatrixPro2 &M);
    CMatrixPro2 operator *(int x);
-   friend istream& operator>>(istream& is, CMatrixPro2 &M);
-   friend ostream& operator<<(ostream& os, CMatrixPro2 &M);
    CMatrixPro2 &operator =(const CMatrixPro2 &M);
    CMatrixPro2 &operator +=(const CMatrixPro2 &M);
    CMatrixPro2 &operator +=(int x);
@@ -39,6 +37,9 @@ class CMatrixPro2{
    CMatrixPro2 &operator -=(int x);
    CMatrixPro2 &operator *=(const CMatrixPro2 &M);
    CMatrixPro2 &operator *=(int x);
+   friend istream& operator>>(istream& is, CMatrixPro2 &M);
+   friend ostream& operator<<(ostream& os, CMatrixPro2 &M);
+
   private:
    int **arr2D;
    int dim;

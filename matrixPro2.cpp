@@ -29,7 +29,7 @@ int CMatrixPro2::getElementAt(int i, int j){
 istream& operator>>(istream& is, CMatrixPro2 &M){
 
    for (int i = 0; i < M.dim; i++){
-	   for(int j = 0; j < M.dim; j++){
+	   for (int j = 0; j < M.dim; j++){
 	      cout << "Enter the value for (" << (i+1) << "," << (j+1) << "): ";
 	      is >> M.arr2D[i][j];
 	   }
@@ -40,10 +40,10 @@ istream& operator>>(istream& is, CMatrixPro2 &M){
 //this prints the current matrix by overloading the output operator <<
 ostream& operator<<(ostream& os, CMatrixPro2 &M){
 
-   for(int i = 0; i < M.dim; i++){
+   for (int i = 0; i < M.dim; i++){
 
-      for(int j = 0; j < M.dim; j++){
-	 os << left << setw(10) <<  M.getElementAt(i+1, j+1);
+      for (int j = 0; j < M.dim; j++){
+	      os << left << setw(10) <<  M.getElementAt(i+1, j+1);
       }
 
       os << endl;
@@ -65,19 +65,19 @@ void CMatrixPro2::resizeMatrix(int newSize){
 
    allocateMatrixMemory(newSize);
 
-   if(newSize > oldSize){
+   if (newSize > oldSize){
       for (int i = 0; i < oldSize; i++){
-	    for(int j = 0; j < oldSize; j++){
-	       arr2D[i][j] = temp[i][j];
-		  }
-	 }
+         for (int j = 0; j < oldSize; j++){
+            arr2D[i][j] = temp[i][j];
+		   }
+	   }
    }
 
-   else{
+   else {
       for (int i = 0; i < newSize; i++){
-	    for(int j = 0; j < newSize; j++){
-	       arr2D[i][j] = temp[i][j];
-	    }
+         for (int j = 0; j < newSize; j++){
+            arr2D[i][j] = temp[i][j];
+	      }
       }
    }
 
@@ -88,7 +88,7 @@ void CMatrixPro2::resizeMatrix(int newSize){
 
 //this deallocates memory (specifically for the resize function, as it properly deallocates the memory of the temp array).
 void CMatrixPro2::deallocateMatrixMemory(int** A, int n){
-   for(int i = 0; i < n; i++){
+   for (int i = 0; i < n; i++){
       delete [] A[i];
    }
 
@@ -121,11 +121,11 @@ int** CMatrixPro2::allocateMatrixMemory(int n){
    dim = n;
    arr2D = new int *[dim];
 
-   for(int i = 0; i < dim; i++){
+   for (int i = 0; i < dim; i++){
       arr2D[i] = new int[dim];
 
-      for(int j = 0; j < dim; j++){
-	 arr2D[i][j] = 0;
+      for (int j = 0; j < dim; j++){
+         arr2D[i][j] = 0;
       }
    }
    return arr2D;
@@ -139,24 +139,24 @@ CMatrixPro2::~CMatrixPro2(){
 //this funtion makes the matrix an identity (1s along the diagonal and 0s everywhere else)
 void CMatrixPro2::makeIdentity(void){
 
-   for(int i = 0; i < dim; i++){
+   for (int i = 0; i < dim; i++){
       for(int j = 0; j < dim; j++){
-	 arr2D[i][j] = 0;
+         arr2D[i][j] = 0;
       }
    }
 
-   for(int i = 0; i < dim; i++){
+   for (int i = 0; i < dim; i++){
       arr2D[i][i] = 1;
    }
 }
 
 //this function determines if a matrix is diagonal (a number along the diagonal and 0s everywhere else)
 bool CMatrixPro2::isDiagonal(void){
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 if((arr2D[i][j] && i != j) != 0){
-	    return false;
-	 }
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+         if ((arr2D[i][j] && i != j) != 0){
+	         return false;
+	      }
       }
    }
    return true;
@@ -164,16 +164,17 @@ bool CMatrixPro2::isDiagonal(void){
 
 //this function determines if a matrix is an identity
 bool CMatrixPro2::isIdentity(){
-   for(int i = 0; i < dim; i++){
-      if(arr2D[i][i] != 1){
-	 return false;
+   for (int i = 0; i < dim; i++){
+      if (arr2D[i][i] != 1){
+	      return false;
       }
-      for(int j = 0; j < dim; j++){
-	 if(i != j){
-	    if(arr2D[i][j] != 0){
-	       return false;
-	    }
-	 }
+
+      for (int j = 0; j < dim; j++){
+	      if (i != j){
+	         if (arr2D[i][j] != 0){
+	            return false;
+	         }
+	      }
       }
    }
    return true;
@@ -182,12 +183,12 @@ bool CMatrixPro2::isIdentity(){
 //this function determines if a matrix is larger than another by overloading the greater than operator >
 bool CMatrixPro2::operator >(const CMatrixPro2 &M){
      assert(dim = M.dim);
-     for(int i = 0; i < M.dim; i++){
-	 for(int j = 0; j < M.dim; j++){
-	    if(arr2D[i][j] > M.arr2D[i][j]){
-	       return true;
-	    }
-	 }
+     for (int i = 0; i < M.dim; i++){
+        for (int j = 0; j < M.dim; j++){
+           if (arr2D[i][j] > M.arr2D[i][j]){
+              return true;
+            }
+	      }
      }
      return false;
 }
@@ -195,11 +196,11 @@ bool CMatrixPro2::operator >(const CMatrixPro2 &M){
 //this function determines if a matrix is smaller than another by overloading the lesser than operator <
 bool CMatrixPro2::operator <(const CMatrixPro2 &M){
    assert(dim = M.dim);
-   for(int i = 0; i < M.dim; i++){
-      for(int j = 0; j < M.dim; j++){
-	 if(arr2D[i][j] < M.arr2D[i][j]){
-	    return true;
-	 }
+   for (int i = 0; i < M.dim; i++){
+      for (int j = 0; j < M.dim; j++){
+	      if (arr2D[i][j] < M.arr2D[i][j]){
+	         return true;
+	      }
       }
    }
    return false;
@@ -208,11 +209,11 @@ bool CMatrixPro2::operator <(const CMatrixPro2 &M){
 //this function determines if a matrix is equal to another by overloading the == operator
 bool CMatrixPro2::operator ==(const CMatrixPro2 &M){
    assert(dim = M.dim);
-   for(int i = 0; i < M.dim; i++){
-      for(int j = 0; j < M.dim; j++){
-	 if(M.arr2D[i][j] == arr2D[i][j]){
-	    return true;
-	 }
+   for (int i = 0; i < M.dim; i++){
+      for (int j = 0; j < M.dim; j++){
+	      if (M.arr2D[i][j] == arr2D[i][j]){
+	         return true;
+	      }
       }
    }
    return false;
@@ -223,8 +224,8 @@ CMatrixPro2 CMatrixPro2::operator +(const CMatrixPro2 &M){
    assert(dim = M.dim);
    CMatrixPro2 temp(dim);
 
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
         temp.arr2D[i][j] = arr2D[i][j] + M.arr2D[i][j];
       }
    }
@@ -235,9 +236,9 @@ CMatrixPro2 CMatrixPro2::operator +(const CMatrixPro2 &M){
 //this functions adds an integer to a matrix(the integer is added to each of the matrix's values) by overloading the + operator
 CMatrixPro2 CMatrixPro2::operator +(int x){
    CMatrixPro2 temp(dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 temp.arr2D[i][j] = arr2D[i][j] + x;
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      temp.arr2D[i][j] = arr2D[i][j] + x;
       }
    }
    return temp;
@@ -247,9 +248,9 @@ CMatrixPro2 CMatrixPro2::operator +(int x){
 CMatrixPro2 CMatrixPro2::operator -(const CMatrixPro2 &M){
    assert(dim = M.dim);
    CMatrixPro2 temp(dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 temp.arr2D[i][j] = arr2D[i][j] - M.arr2D[i][j];
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      temp.arr2D[i][j] = arr2D[i][j] - M.arr2D[i][j];
       }
    }
    return temp;
@@ -258,9 +259,9 @@ CMatrixPro2 CMatrixPro2::operator -(const CMatrixPro2 &M){
 //this function subtracts an integer from a matrix (the integer is subtracted from each of the matrix's values) by overloading the - operator
 CMatrixPro2 CMatrixPro2::operator -(int x){
    CMatrixPro2 temp(dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 temp.arr2D[i][j] = arr2D[i][j] - x;
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      temp.arr2D[i][j] = arr2D[i][j] - x;
       }
    }
    return temp;
@@ -270,10 +271,10 @@ CMatrixPro2 CMatrixPro2::operator -(int x){
 CMatrixPro2 CMatrixPro2::operator *(const CMatrixPro2 &M){
    assert(dim = M.dim);
    CMatrixPro2 temp(dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 for(int k = 0; k < dim; k++){
-	    temp.arr2D[i][j] += (arr2D[i][k] * M.arr2D[k][j]);
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      for (int k = 0; k < dim; k++){
+	         temp.arr2D[i][j] += (arr2D[i][k] * M.arr2D[k][j]);
 	 }
       }
    }
@@ -283,9 +284,9 @@ CMatrixPro2 CMatrixPro2::operator *(const CMatrixPro2 &M){
 //this function multiplies an integer to a matrix (the integer is multiplied to each of the matrix's values) by overloading the * operator
 CMatrixPro2 CMatrixPro2::operator *(int x){
    CMatrixPro2 temp(dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 temp.arr2D[i][j] = arr2D[i][j] * x;
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      temp.arr2D[i][j] = arr2D[i][j] * x;
       }
    }
    return temp;
@@ -294,8 +295,8 @@ CMatrixPro2 CMatrixPro2::operator *(int x){
 //this function overloads the += operator and sets the left operand equal to its sum with the left operand(another matrix).
 CMatrixPro2 &CMatrixPro2::operator +=(const CMatrixPro2 &M){
    assert(dim = M.dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
         this -> arr2D[i][j] = arr2D[i][j] + M.arr2D[i][j];
       }
    }
@@ -305,9 +306,9 @@ CMatrixPro2 &CMatrixPro2::operator +=(const CMatrixPro2 &M){
 
 //this function overloads the += operator and sets the left operand equal to its sum with the left operand(an integer).
 CMatrixPro2 &CMatrixPro2::operator +=(int x){
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 this -> arr2D[i][j] = arr2D[i][j] + x;
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      this -> arr2D[i][j] = arr2D[i][j] + x;
       }
    }
    return *this;
@@ -316,9 +317,9 @@ CMatrixPro2 &CMatrixPro2::operator +=(int x){
 //this function overloads the -= operator and sets the left operand equal to its difference  with the left operand(another matrix).
 CMatrixPro2 &CMatrixPro2::operator -=(const CMatrixPro2 &M){
    assert(dim = M.dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 this -> arr2D[i][j] = arr2D[i][j] - M.arr2D[i][j];
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      this -> arr2D[i][j] = arr2D[i][j] - M.arr2D[i][j];
       }
    }
    return *this;
@@ -326,9 +327,9 @@ CMatrixPro2 &CMatrixPro2::operator -=(const CMatrixPro2 &M){
 
 //this function overloads the -= operator and sets the left operand equal to its product with the left operand(an integer).
 CMatrixPro2 &CMatrixPro2::operator -=(int x){
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 this -> arr2D[i][j] = arr2D[i][j] - x;
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      this -> arr2D[i][j] = arr2D[i][j] - x;
       }
    }
    return *this;
@@ -338,11 +339,11 @@ CMatrixPro2 &CMatrixPro2::operator -=(int x){
 CMatrixPro2 &CMatrixPro2::operator *=(const CMatrixPro2 &M){
    assert(dim = M.dim);
    CMatrixPro2 temp(dim);
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 for(int k = 0; k < dim; k++){
-	    temp.arr2D[i][j] += (arr2D[i][k] * M.arr2D[k][j]);
-	 }
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      for (int k = 0; k < dim; k++){
+	         temp.arr2D[i][j] += (arr2D[i][k] * M.arr2D[k][j]);
+	      }
       }
    }
    *this = temp;
@@ -351,9 +352,9 @@ CMatrixPro2 &CMatrixPro2::operator *=(const CMatrixPro2 &M){
 
 //this function overloads the *= operator and sets the left operand equal to its product with the left operand(another integer).
 CMatrixPro2 &CMatrixPro2::operator *=(int x){
-   for(int i = 0; i < dim; i++){
-      for(int j = 0; j < dim; j++){
-	 this -> arr2D[i][j] = arr2D[i][j] * x;
+   for (int i = 0; i < dim; i++){
+      for (int j = 0; j < dim; j++){
+	      this -> arr2D[i][j] = arr2D[i][j] * x;
       }
    }
    return *this;
@@ -361,15 +362,16 @@ CMatrixPro2 &CMatrixPro2::operator *=(int x){
 
 //this is the copy matrix function which overloads the assignment operator =
 CMatrixPro2& CMatrixPro2::operator =(const CMatrixPro2 &M){
-   if(this != &M){
-      if(M.dim != dim){
-	 this -> resizeMatrix(M.dim);
-      }	 
+   if (this != &M){
+      if (M.dim != dim){
+	      this -> resizeMatrix(M.dim);
+      }
+
       deallocateMatrixMemory(arr2D, dim);
       arr2D = allocateMatrixMemory(M.dim);
 
       for (int i = 0; i < M.dim; i++){
-         for(int j = 0; j < M.dim; j++){
+         for (int j = 0; j < M.dim; j++){
             arr2D[i][j] = M.arr2D[i][j];
          }
       }
